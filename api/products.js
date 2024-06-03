@@ -1,5 +1,12 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+
+app.use(
+  cors({
+    methods: ["GET"],
+  }),
+);
 
 const URL = "https://images-movie-store.s3.sa-east-1.amazonaws.com";
 
