@@ -2,13 +2,10 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const products = require("./data");
-const basicAuth = require("express-basic-auth");
+const authChallenge = require("./middleware/basicAuth");
+const limiter = require("./middleware/rateLimiter");
 
-const authChallenge = basicAuth({
-  users: {
-    admin: "123",
-  },
-});
+app.use(limiter);
 
 app.use(
   cors({

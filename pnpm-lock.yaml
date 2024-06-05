@@ -17,6 +17,9 @@ importers:
       express-basic-auth:
         specifier: ^1.2.1
         version: 1.2.1
+      express-rate-limit:
+        specifier: ^7.3.0
+        version: 7.3.0(express@4.19.2)
       uuid:
         specifier: ^9.0.1
         version: 9.0.1
@@ -109,6 +112,12 @@ packages:
 
   express-basic-auth@1.2.1:
     resolution: {integrity: sha512-L6YQ1wQ/mNjVLAmK3AG1RK6VkokA1BIY6wmiH304Xtt/cLTps40EusZsU1Uop+v9lTDPxdtzbFmdXfFO3KEnwA==}
+
+  express-rate-limit@7.3.0:
+    resolution: {integrity: sha512-ZPfWlcQQ1PsZonB/vqksOsBQV74z5osi/QcdoBCyKJXl/wOVjS1yRDmvkpMM52KJeLbiF2+djwVEnEgVCDdvtw==}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      express: 4 || 5 || ^5.0.0-beta.1
 
   express@4.19.2:
     resolution: {integrity: sha512-5T6nhjsT+EOMzuck8JjBHARTHfMht0POzlA60WV2pMD3gyXw2LZnZ+ueGdNxG+0calOJcWKbpFcuzLZ91YWq9Q==}
@@ -376,6 +385,10 @@ snapshots:
   express-basic-auth@1.2.1:
     dependencies:
       basic-auth: 2.0.1
+
+  express-rate-limit@7.3.0(express@4.19.2):
+    dependencies:
+      express: 4.19.2
 
   express@4.19.2:
     dependencies:
