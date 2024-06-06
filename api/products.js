@@ -13,13 +13,13 @@ app.use(
   }),
 );
 
-app.get("/api/products", authChallenge, (res) => {
+app.get("/api/products", authChallenge, (req, res) => {
   res.json({ products });
 });
 
 app.get("/api/products/:id", authChallenge, (req, res) => {
   const { id } = req.params;
-  const product = products.find((item) => item.id === parseInt(id));
+  const product = products.find((item) => item.id === id);
   product ? res.json(product) : res.status(404).send("Produto não encontrado");
 });
 
