@@ -97,7 +97,7 @@ const products = [
     quantityAvailable: 14,
     description:
       "Avatar é um filme épico de ficção científica estadunidense de 2009, escrito e dirigido por James Cameron, e estrelado por Sam Worthington, Zoë Saldaña, Sigourney Weaver e Stephen Lang.",
-    durationFilm: 219,
+    durationFilm: 162,
   },
   {
     id: uuidv4(),
@@ -109,7 +109,7 @@ const products = [
     quantityAvailable: 21,
     description:
       "Hannibal Lecter é um personagem fictício e protagonista da série de livros de suspense escrita por Thomas Harris.",
-    durationFilm: 120,
+    durationFilm: 131,
   },
 ];
 
