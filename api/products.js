@@ -4,6 +4,7 @@ const cors = require("cors");
 const products = require("./data");
 const authChallenge = require("./middleware/basicAuth");
 const limiter = require("./middleware/rateLimiter");
+const normalizeTitle = require("./utils/normalizeText");
 
 app.use(limiter);
 
@@ -17,9 +18,12 @@ app.get("/api/products", authChallenge, (req, res) => {
   res.json({ products });
 });
 
-app.get("/api/products/:id", authChallenge, (req, res) => {
-  const { id } = req.params;
-  const product = products.find((item) => item.id === id);
+app.get("/api/products/:title", authChallenge, (req, res) => {
+  const { title } = req.params;
+  const normalizedTitle = normalizeTitle(title);
+  const product = products.find(
+    (item) => normalizeTitle(item.title) === normalizedTitle,
+  );
   product ? res.json(product) : res.status(404).send("Produto não encontrado");
 });
 
