@@ -1,10 +1,8 @@
-const { v4: uuidv4 } = require("uuid");
-
 const URL = "https://images-movie-store.s3.sa-east-1.amazonaws.com";
 
 const products = [
   {
-    id: uuidv4(),
+    id: "prod-1",
     new: true,
     title: "Viúva Negra",
     price: 39.99,
@@ -16,7 +14,7 @@ const products = [
     durationFilm: 134,
   },
   {
-    id: uuidv4(),
+    id: "prod-2",
     new: false,
     title: "Shang-Chi",
     price: 31.99,
@@ -28,7 +26,7 @@ const products = [
     durationFilm: 132,
   },
   {
-    id: uuidv4(),
+    id: "prod-3",
     new: true,
     title: "Homem Aranha",
     price: 19.99,
@@ -40,7 +38,7 @@ const products = [
     durationFilm: 129,
   },
   {
-    id: uuidv4(),
+    id: "prod-4",
     new: true,
     title: "Morbius",
     price: 51.99,
@@ -52,7 +50,7 @@ const products = [
     durationFilm: 104,
   },
   {
-    id: uuidv4(),
+    id: "prod-5",
     new: false,
     title: "Batman",
     price: 60.99,
@@ -64,8 +62,8 @@ const products = [
     durationFilm: 120,
   },
   {
-    id: uuidv4(),
-    new: false,
+    id: "prod-6",
+    new: true,
     title: "Eternos",
     price: 22.99,
     priceWithDiscount: null,
@@ -76,7 +74,7 @@ const products = [
     durationFilm: 156,
   },
   {
-    id: uuidv4(),
+    id: "prod-7",
     new: false,
     title: "Vingadores",
     price: 109.99,
@@ -88,7 +86,7 @@ const products = [
     durationFilm: 124,
   },
   {
-    id: uuidv4(),
+    id: "prod-8",
     new: false,
     title: "Avatar",
     price: 19.99,
@@ -100,8 +98,8 @@ const products = [
     durationFilm: 162,
   },
   {
-    id: uuidv4(),
-    new: false,
+    id: "prod-9",
+    new: true,
     title: "Hannibal",
     price: 93.39,
     priceWithDiscount: null,
