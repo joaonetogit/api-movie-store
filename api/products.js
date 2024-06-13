@@ -18,13 +18,27 @@ app.get("/api/products", authChallenge, (req, res) => {
   res.json({ products });
 });
 
-app.get("/api/products/:title", authChallenge, (req, res) => {
+app.get("/api/product/:title", authChallenge, (req, res) => {
   const { title } = req.params;
   const normalizedTitle = normalizeTitle(title);
+
   const product = products.find(
     (item) => normalizeTitle(item.title) === normalizedTitle,
   );
-  product ? res.json(product) : res.status(404).send("Produto não encontrado");
+  product ? res.json(product) : res.status(404).send("Product not found");
+});
+
+app.get("/api/products/category/:category", authChallenge, (req, res) => {
+  const { category } = req.params;
+  const normalizedCategory = normalizeTitle(category);
+
+  const filteredProducts = products.filter(
+    (item) => normalizeTitle(item.category) === normalizedCategory,
+  );
+
+  filteredProducts.length > 0
+    ? res.json({ products: filteredProducts })
+    : res.status(404).send("No products found for this category");
 });
 
 app.listen(3001, () => {
