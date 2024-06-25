@@ -30,6 +30,10 @@ pnpm start
 
 Returns all the products in the store.
 
-### GET /api/products/:id
+### GET /api/product/:title
 
-Returns a specific product with the given ID.
+Returns a specific product with the given title.
+
+### GET /api/products/category/:category
+
+Returns products from a specific category
