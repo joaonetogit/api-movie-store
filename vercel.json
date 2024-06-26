@@ -13,7 +13,7 @@
     }
   ],
   "env": {
-    "PORT": 3001,
+    "PORT": "3001",
     "BASE_URL": "https://images-movie-store.s3.sa-east-1.amazonaws.com",
     "SECRET_KEY": "ws87cTdeGYLgM"
   }
