@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const routes = require("./productsRoutes");
+const routes = require("./routes");
 require("dotenv").config();
 
 const port = process.env.PORT || 3001;
@@ -11,6 +11,8 @@ app.use(
     methods: ["GET"],
   }),
 );
+
+app.use(express.json());
 
 app.use(routes);
 

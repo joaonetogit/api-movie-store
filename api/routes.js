@@ -1,19 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const authChallenge = require("./middleware/basicAuth");
+const authController = require("./controllers/authController");
 const productsController = require("./controllers/productsController");
+const authenticateToken = require("./middleware/authenticateToken");
 
-router.get("/api/products", authChallenge, productsController.getAll);
+router.post("/api/login", authController.getToken);
+
+router.get("/api/products", authenticateToken, productsController.getAll);
 
 router.get(
   "/api/product/:title",
-  authChallenge,
+  authenticateToken,
   productsController.getOneByTitle,
 );
 
 router.get(
   "/api/products/category/:category",
-  authChallenge,
+  authenticateToken,
   productsController.getProductsByCategory,
 );
 
