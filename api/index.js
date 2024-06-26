@@ -3,10 +3,7 @@ const app = express();
 const cors = require("cors");
 const products = require("./data");
 const authChallenge = require("./middleware/basicAuth");
-const limiter = require("./middleware/rateLimiter");
 const normalizeTitle = require("./utils/normalizeText");
-
-app.use(limiter);
 
 app.use(
   cors({
