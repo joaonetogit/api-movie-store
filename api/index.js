@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const routes = require("./productsRoutes");
+require("dotenv").config();
+
+const port = process.env.PORT || 3001;
 
 app.use(
   cors({
@@ -11,8 +14,8 @@ app.use(
 
 app.use(routes);
 
-app.listen(3001, () => {
-  console.log("Server is running on port 3001");
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
 
 module.exports = app;

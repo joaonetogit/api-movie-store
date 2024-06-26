@@ -1,11 +1,17 @@
-const URL = "https://images-movie-store.s3.sa-east-1.amazonaws.com";
+require("dotenv").config();
+
+const URL = process.env.BASE_URL;
+
+if (!URL) {
+  throw new Error("BASE_URL is not defined in the environment variables");
+}
 
 const extensionArchive = ".webp";
 
 const products = [
   {
     id: "prod-1",
-    new: true,
+    createdAt: "2024-05-11T11:24:59Z",
     title: "Black Widow",
     price: 39.99,
     priceWithDiscount: null,
@@ -19,7 +25,7 @@ const products = [
   },
   {
     id: "prod-2",
-    new: false,
+    createdAt: "2024-05-13T13:22:47Z",
     title: "Shang-Chi",
     price: 31.99,
     priceWithDiscount: 22.99,
@@ -33,7 +39,7 @@ const products = [
   },
   {
     id: "prod-3",
-    new: true,
+    createdAt: "2024-05-15T09:18:34Z",
     title: "Spider-Man",
     price: 19.99,
     priceWithDiscount: null,
@@ -47,7 +53,7 @@ const products = [
   },
   {
     id: "prod-4",
-    new: true,
+    createdAt: "2024-05-17T14:45:22Z",
     title: "Morbius",
     price: 51.99,
     priceWithDiscount: null,
@@ -61,7 +67,7 @@ const products = [
   },
   {
     id: "prod-5",
-    new: false,
+    createdAt: "2024-05-19T10:22:11Z",
     title: "Batman",
     price: 60.99,
     priceWithDiscount: 42.99,
@@ -75,7 +81,7 @@ const products = [
   },
   {
     id: "prod-6",
-    new: true,
+    createdAt: "2024-05-21T08:37:45Z",
     title: "Eternals",
     price: 22.99,
     priceWithDiscount: null,
@@ -89,7 +95,7 @@ const products = [
   },
   {
     id: "prod-7",
-    new: false,
+    createdAt: "2024-05-23T16:19:08Z",
     title: "Avengers",
     price: 109.99,
     priceWithDiscount: null,
@@ -103,7 +109,7 @@ const products = [
   },
   {
     id: "prod-8",
-    new: false,
+    createdAt: "2024-05-25T12:00:00Z",
     title: "Avatar",
     price: 19.99,
     priceWithDiscount: null,
@@ -117,7 +123,7 @@ const products = [
   },
   {
     id: "prod-9",
-    new: true,
+    createdAt: "2024-05-27T10:45:30Z",
     title: "Hannibal",
     price: 93.39,
     priceWithDiscount: null,
@@ -131,7 +137,7 @@ const products = [
   },
   {
     id: "prod-10",
-    new: false,
+    createdAt: "2024-05-29T13:30:45Z",
     title: "Inception",
     price: 14.99,
     priceWithDiscount: 9.99,
@@ -145,7 +151,7 @@ const products = [
   },
   {
     id: "prod-11",
-    new: true,
+    createdAt: "2024-05-31T08:00:00Z",
     title: "The Matrix",
     price: 12.99,
     priceWithDiscount: null,
@@ -159,7 +165,7 @@ const products = [
   },
   {
     id: "prod-12",
-    new: false,
+    createdAt: "2024-06-02T11:59:59Z",
     title: "The Godfather",
     price: 24.99,
     priceWithDiscount: 19.99,
@@ -173,7 +179,7 @@ const products = [
   },
   {
     id: "prod-13",
-    new: true,
+    createdAt: "2024-06-04T09:15:25Z",
     title: "Jurassic Park",
     price: 19.99,
     priceWithDiscount: null,
@@ -187,7 +193,7 @@ const products = [
   },
   {
     id: "prod-14",
-    new: false,
+    createdAt: "2024-06-06T14:35:48Z",
     title: "Titanic",
     price: 15.99,
     priceWithDiscount: 12.99,
@@ -201,7 +207,7 @@ const products = [
   },
   {
     id: "prod-15",
-    new: true,
+    createdAt: "2024-06-08T16:55:11Z",
     title: "The Lord of the Rings: The Fellowship of the Ring",
     price: 29.99,
     priceWithDiscount: null,
@@ -212,20 +218,6 @@ const products = [
     durationFilm: 178,
     category: "Fantasy",
     director: "Peter Jackson",
-  },
-  {
-    id: "prod-16",
-    new: false,
-    title: "Star Wars: Episode IV - A New Hope",
-    price: 22.99,
-    priceWithDiscount: 18.99,
-    image: `${URL}/star-wars-iv${extensionArchive}`,
-    quantityAvailable: 20,
-    description:
-      "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee, and two droids to save the galaxy from the Empire's world-destroying battle station while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
-    durationFilm: 121,
-    category: "Science Fiction",
-    director: "George Lucas",
   },
 ];
 
