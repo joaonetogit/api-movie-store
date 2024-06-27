@@ -1,14 +1,20 @@
 import { Router } from "express";
 import getToken from "../controllers/authController.js";
 import {
+  deleteProduct,
   getAll,
   getOneByTitle,
   getProductsByCategory,
+  newProduct,
 } from "../controllers/productsController.js";
 import authenticateToken from "../middleware/authenticateToken.js";
 const router = Router();
 
 router.post("/api/login", getToken);
+
+router.post("/api/product", authenticateToken, newProduct);
+
+router.delete("/api/product/:id", authenticateToken, deleteProduct);
 
 router.get("/api/products", authenticateToken, getAll);
 
