@@ -6,6 +6,7 @@ import {
   getOneByTitle,
   getProductsByCategory,
   newProduct,
+  updateProduct,
 } from "../controllers/productsController.js";
 import authenticateToken from "../middleware/authenticateToken.js";
 const router = Router();
@@ -13,6 +14,8 @@ const router = Router();
 router.post("/api/login", getToken);
 
 router.post("/api/product", authenticateToken, newProduct);
+
+router.put("/api/product/:id", authenticateToken, updateProduct);
 
 router.delete("/api/product/:id", authenticateToken, deleteProduct);
 

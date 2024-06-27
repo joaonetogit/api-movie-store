@@ -79,3 +79,28 @@ export async function deleteProduct(req, res) {
     return res.status(500).send("Error deleting product");
   }
 }
+
+export async function updateProduct(req, res) {
+  const { id } = req.params;
+  const updateData = req.body;
+
+  try {
+    const productToUpdate = await Product.findById(id);
+
+    if (!productToUpdate) {
+      return res.status(404).send("Product not found");
+    }
+
+    for (let key in updateData) {
+      if (updateData.hasOwnProperty(key)) {
+        productToUpdate[key] = updateData[key];
+      }
+    }
+
+    await productToUpdate.save();
+
+    return res.status(200).json(productToUpdate);
+  } catch (err) {
+    return res.status(500).send("Error updating product");
+  }
+}
