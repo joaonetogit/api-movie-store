@@ -10,7 +10,7 @@ const port = process.env.PORT || 3001;
 
 app.use(
   cors({
-    methods: ["GET", "POST", "DELETE"],
+    methods: ["GET", "PUT", "POST", "DELETE"],
   }),
 );
 
