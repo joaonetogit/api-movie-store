@@ -1,13 +1,14 @@
-require("dotenv").config();
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+import bcrypt from "bcryptjs";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+dotenv.config();
 
 const passRegistered = process.env.SECRET_PASS;
 
 const adminUsername = process.env.SECRET_USER;
 const adminPasswordHash = bcrypt.hashSync(passRegistered, 10);
 
-exports.getToken = (req, res) => {
+function getToken(req, res) {
   const { username, password } = req.body;
 
   if (username !== adminUsername) {
@@ -24,4 +25,6 @@ exports.getToken = (req, res) => {
   } else {
     res.send("Wrong password!");
   }
-};
+}
+
+export default getToken;

@@ -1,11 +1,11 @@
-const products = require("../data/products");
-const normalizeTitle = require("../utils/normalizeText");
+import products from "../data/products.js";
+import normalizeTitle from "../utils/normalizeText.js";
 
-exports.getAll = (req, res) => {
+export function getAll(req, res) {
   res.json({ products });
-};
+}
 
-exports.getOneByTitle = (req, res) => {
+export function getOneByTitle(req, res) {
   const { title } = req.params;
   const normalizedTitle = normalizeTitle(title);
 
@@ -13,9 +13,9 @@ exports.getOneByTitle = (req, res) => {
     (item) => normalizeTitle(item.title) === normalizedTitle,
   );
   product ? res.json(product) : res.status(404).send("Product not found");
-};
+}
 
-exports.getProductsByCategory = (req, res) => {
+export function getProductsByCategory(req, res) {
   const { category } = req.params;
   const normalizedCategory = normalizeTitle(category);
 
@@ -26,4 +26,4 @@ exports.getProductsByCategory = (req, res) => {
   filteredProducts.length > 0
     ? res.json({ products: filteredProducts })
     : res.status(404).send("No products found for this category");
-};
+}

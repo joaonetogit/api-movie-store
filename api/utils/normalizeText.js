@@ -1,4 +1,4 @@
-function normalizeTitle(title) {
+export default function normalizeTitle(title) {
   return title
     .toLowerCase()
     .normalize("NFD")
@@ -8,5 +8,3 @@ function normalizeTitle(title) {
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-");
 }
-
-module.exports = normalizeTitle;

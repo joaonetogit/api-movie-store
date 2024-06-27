@@ -1,4 +1,5 @@
-require("dotenv").config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 const URL = process.env.BASE_URL;
 
@@ -221,4 +222,4 @@ const products = [
   },
 ];
 
-module.exports = products;
+export default products;
