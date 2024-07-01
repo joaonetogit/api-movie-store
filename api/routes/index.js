@@ -11,20 +11,20 @@ import {
 import authenticateToken from "../middleware/authenticateToken.js";
 const router = Router();
 
-router.post("/api/login", getToken);
+router.post("/login", getToken);
 
-router.post("/api/product", authenticateToken, newProduct);
+router.post("/product", authenticateToken, newProduct);
 
-router.put("/api/product/:id", authenticateToken, updateProduct);
+router.put("/product/:id", authenticateToken, updateProduct);
 
-router.delete("/api/product/:id", authenticateToken, deleteProduct);
+router.delete("/product/:id", authenticateToken, deleteProduct);
 
-router.get("/api/products", authenticateToken, getAll);
+router.get("/products", authenticateToken, getAll);
 
-router.get("/api/product/:title", authenticateToken, getOneByTitle);
+router.get("/product/:title", authenticateToken, getOneByTitle);
 
 router.get(
-  "/api/products/category/:category",
+  "/products/category/:category",
   authenticateToken,
   getProductsByCategory,
 );
