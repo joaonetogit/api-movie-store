@@ -10,37 +10,21 @@ const port = process.env.PORT || 3001;
 
 const corsOptions = {
   origin: ["http://localhost:5173/", "https://movie-store-xi.vercel.app/"],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-  allowedHeaders: [
-    "X-CSRF-Token",
-    "X-Requested-With",
-    "Accept",
-    "Accept-Version",
-    "Content-Length",
-    "Content-MD5",
-    "Content-Type",
-    "Date",
-    "X-Api-Version",
-    "Authorization",
-    "Origin",
-  ],
-  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 app.use(cors(corsOptions));
+
 app.use(express.json());
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+    "GET, POST, PUT, DELETE, OPTIONS",
   );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization",
-  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
 });
 
