@@ -9,7 +9,7 @@ dotenv.config();
 const port = process.env.PORT || 3001;
 
 const corsOptions = {
-  origin: ["http://localhost/", "https://movie-store-xi.vercel.app/"],
+  origin: ["http://localhost:5173/", "https://movie-store-xi.vercel.app/"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
   allowedHeaders: [
     "X-CSRF-Token",
