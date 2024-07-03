@@ -19,7 +19,7 @@ function getToken(req, res) {
     const accessToken = jwt.sign(
       { username: adminUsername },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" },
+      { expiresIn: "1d" },
     );
     res.json({ accessToken });
   } else {

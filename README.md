@@ -26,6 +26,10 @@ pnpm start
 
 ## Endpoints
 
+### GET /api/login
+
+Returns the authorization token for the next requests
+
 ### GET /api/products
 
 Returns all the products in the store.
