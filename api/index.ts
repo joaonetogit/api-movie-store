@@ -1,8 +1,8 @@
-import cors from "cors";
-import dotenv from "dotenv";
-import express from "express";
-import mongoose from "mongoose";
-import router from "./routes/index.js";
+import cors from 'cors';
+import dotenv from 'dotenv';
+import express from 'express';
+import mongoose from 'mongoose';
+import router from './routes/index.js';
 const app = express();
 dotenv.config();
 
@@ -12,15 +12,15 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use("/api", router);
+app.use('/api', router);
 
 mongoose
   .connect(process.env.MONGODB_URI as string)
   .then(() => {
-    console.log("Successfully connected to MongoDB Atlas!");
+    console.log('Successfully connected to MongoDB Atlas!');
   })
-  .catch((error) => {
-    console.error("Error connecting to MongoDB Atlas: ", error);
+  .catch(error => {
+    console.error('Error connecting to MongoDB Atlas: ', error);
   });
 
 app.listen(port, () => {

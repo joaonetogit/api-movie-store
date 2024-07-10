@@ -1,13 +1,13 @@
-import { Request, Response } from "express";
-import Product from "../models/product.js";
-import normalizeTitle from "../utils/normalizeText.js";
+import { Request, Response } from 'express';
+import Product from '../models/product.js';
+import normalizeTitle from '../utils/normalizeText.js';
 
 export async function getAll(req: Request, res: Response) {
   try {
     const products = await Product.find();
     return res.status(200).json(products);
   } catch (err) {
-    return res.status(500).send("Error fetching products");
+    return res.status(500).send('Error fetching products');
   }
 }
 
@@ -18,17 +18,15 @@ export async function getOneByTitle(req: Request, res: Response) {
   try {
     const products = await Product.find();
 
-    const product = products.find(
-      (product) => normalizeTitle(product.title) === titleToSearch,
-    );
+    const product = products.find(product => normalizeTitle(product.title) === titleToSearch);
 
     if (product) {
       return res.json(product);
     } else {
-      return res.status(404).send("Product not found");
+      return res.status(404).send('Product not found');
     }
   } catch (err) {
-    return res.status(500).send("Error fetching product");
+    return res.status(500).send('Error fetching product');
   }
 }
 
@@ -40,16 +38,16 @@ export async function getProductsByCategory(req: Request, res: Response) {
     const products = await Product.find();
 
     const filteredProducts = products.find(
-      (product) => normalizeTitle(product.category) === categoryToSearch,
+      product => normalizeTitle(product.category) === categoryToSearch,
     );
 
     if (filteredProducts) {
       return res.json(filteredProducts);
     } else {
-      return res.status(404).send("No products found for this categoryd");
+      return res.status(404).send('No products found for this categoryd');
     }
   } catch (err) {
-    return res.status(500).send("Error fetching products");
+    return res.status(500).send('Error fetching products');
   }
 }
 
@@ -59,7 +57,7 @@ export async function newProduct(req: Request, res: Response) {
     const newProduct = await Product.create(product);
     return res.status(201).json(newProduct);
   } catch (err) {
-    return res.status(500).send("Error creating product");
+    return res.status(500).send('Error creating product');
   }
 }
 
@@ -70,14 +68,14 @@ export async function deleteProduct(req: Request, res: Response) {
     const productToDelete = await Product.findById(id);
 
     if (!productToDelete) {
-      return res.status(404).send("Product not found");
+      return res.status(404).send('Product not found');
     }
 
     await productToDelete.deleteOne();
 
-    return res.status(200).send("Product deleted successfully");
+    return res.status(200).send('Product deleted successfully');
   } catch (err) {
-    return res.status(500).send("Error deleting product");
+    return res.status(500).send('Error deleting product');
   }
 }
 
@@ -89,7 +87,7 @@ export async function updateProduct(req: Request, res: Response) {
     const productToUpdate = await Product.findById(id);
 
     if (!productToUpdate) {
-      return res.status(404).send("Product not found");
+      return res.status(404).send('Product not found');
     }
 
     for (let key in updateData) {
@@ -102,6 +100,6 @@ export async function updateProduct(req: Request, res: Response) {
 
     return res.status(200).json(productToUpdate);
   } catch (err) {
-    return res.status(500).send("Error updating product");
+    return res.status(500).send('Error updating product');
   }
 }
