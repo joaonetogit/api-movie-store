@@ -1,7 +1,8 @@
+import { Request, Response } from "express";
 import Product from "../models/product.js";
 import normalizeTitle from "../utils/normalizeText.js";
 
-export async function getAll(req, res) {
+export async function getAll(req: Request, res: Response) {
   try {
     const products = await Product.find();
     return res.status(200).json(products);
@@ -10,7 +11,7 @@ export async function getAll(req, res) {
   }
 }
 
-export async function getOneByTitle(req, res) {
+export async function getOneByTitle(req: Request, res: Response) {
   const { title } = req.params;
   const titleToSearch = normalizeTitle(title);
 
@@ -31,7 +32,7 @@ export async function getOneByTitle(req, res) {
   }
 }
 
-export async function getProductsByCategory(req, res) {
+export async function getProductsByCategory(req: Request, res: Response) {
   const { category } = req.params;
   const categoryToSearch = normalizeTitle(category);
 
@@ -52,7 +53,7 @@ export async function getProductsByCategory(req, res) {
   }
 }
 
-export async function newProduct(req, res) {
+export async function newProduct(req: Request, res: Response) {
   try {
     const product = req.body;
     const newProduct = await Product.create(product);
@@ -62,7 +63,7 @@ export async function newProduct(req, res) {
   }
 }
 
-export async function deleteProduct(req, res) {
+export async function deleteProduct(req: Request, res: Response) {
   const { id } = req.params;
 
   try {
@@ -80,7 +81,7 @@ export async function deleteProduct(req, res) {
   }
 }
 
-export async function updateProduct(req, res) {
+export async function updateProduct(req: Request, res: Response) {
   const { id } = req.params;
   const updateData = req.body;
 

@@ -1,30 +1,20 @@
-import bcrypt from "bcryptjs";
-import dotenv from "dotenv";
-import jwt from "jsonwebtoken";
-dotenv.config();
+import { Request, Response } from "express";
+import { HttpStatusCode } from "../types/HttpStatusCode";
+import { generateToken } from "../utils/generateToken";
+import { getUser } from "../utils/getUser";
 
-const passRegistered = process.env.SECRET_PASS;
-
-const adminUsername = process.env.SECRET_USER;
-const adminPasswordHash = bcrypt.hashSync(passRegistered, 10);
-
-function getToken(req, res) {
+export function authUser(req: Request, res: Response) {
   const { username, password } = req.body;
+  const user = getUser(username, password);
 
-  if (username !== adminUsername) {
-    return res.status(400).send("User not found");
+  if (!user) {
+    return res
+      .status(HttpStatusCode.NOT_FOUND)
+      .json({ message: "User not found" });
   }
 
-  if (bcrypt.compareSync(password, adminPasswordHash)) {
-    const accessToken = jwt.sign(
-      { username: adminUsername },
-      process.env.JWT_SECRET,
-      { expiresIn: "1d" },
-    );
-    res.json({ accessToken });
-  } else {
-    res.send("Wrong password!");
-  }
+  const token = generateToken(user);
+  return res
+    .status(HttpStatusCode.OK)
+    .json({ message: "Login successful", token });
 }
-
-export default getToken;

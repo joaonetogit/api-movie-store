@@ -1,5 +1,5 @@
 import { Router } from "express";
-import getToken from "../controllers/authController.js";
+import { authUser } from "../controllers/authController.js";
 import {
   deleteProduct,
   getAll,
@@ -11,7 +11,7 @@ import {
 import authenticateToken from "../middleware/authenticateToken.js";
 const router = Router();
 
-router.post("/login", getToken);
+router.post("/login", authUser);
 
 router.post("/product", authenticateToken, newProduct);
 
