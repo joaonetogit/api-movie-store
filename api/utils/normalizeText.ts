@@ -1,4 +1,4 @@
-export default function normalizeTitle(title) {
+export default function normalizeTitle(title: string): string {
   return title
     .toLowerCase()
     .normalize("NFD")
