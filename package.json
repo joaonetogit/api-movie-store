@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsx api/index.js",
+    "dev": "tsx watch api/index.js",
     "prettier": "prettier api --write",
     "lint": "eslint api --ext .ts",
     "lint:fix": "eslint api --fix --ext .ts"

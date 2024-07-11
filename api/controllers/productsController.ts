@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import ProductModel from '../models/product.js';
-import normalizeTitle from '../utils/normalizeText.js';
+import ProductModel from '../models/product';
+import normalizeTitle from '../utils/normalizeText';
 
 async function getAll(req: Request, res: Response) {
   try {

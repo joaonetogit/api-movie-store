@@ -20,7 +20,7 @@ module.exports = {
       },
     },
   ],
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier', 'import'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
