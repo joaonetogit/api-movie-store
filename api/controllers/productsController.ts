@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import ProductModel from '../models/product.js';
 import normalizeTitle from '../utils/normalizeText.js';
 
-export async function getAll(req: Request, res: Response) {
+async function getAll(req: Request, res: Response) {
   try {
     const products = await ProductModel.find();
     return res.status(200).json(products);
@@ -11,7 +11,7 @@ export async function getAll(req: Request, res: Response) {
   }
 }
 
-export async function getOneByTitle(req: Request, res: Response) {
+async function getOneByTitle(req: Request, res: Response) {
   const { title } = req.params;
   const titleToSearch = normalizeTitle(title);
 
@@ -29,7 +29,7 @@ export async function getOneByTitle(req: Request, res: Response) {
   }
 }
 
-export async function getProductsByCategory(req: Request, res: Response) {
+async function getProductsByCategory(req: Request, res: Response) {
   const { category } = req.params;
   const categoryToSearch = normalizeTitle(category);
 
@@ -47,7 +47,7 @@ export async function getProductsByCategory(req: Request, res: Response) {
   }
 }
 
-export async function addProduct(req: Request, res: Response) {
+async function addProduct(req: Request, res: Response) {
   try {
     const productData = req.body;
     const createdProduct = await ProductModel.create(productData);
@@ -57,7 +57,7 @@ export async function addProduct(req: Request, res: Response) {
   }
 }
 
-export async function deleteProduct(req: Request, res: Response) {
+async function deleteProduct(req: Request, res: Response) {
   const { id } = req.params;
 
   try {
@@ -75,7 +75,7 @@ export async function deleteProduct(req: Request, res: Response) {
   }
 }
 
-export async function updateProduct(req: Request, res: Response) {
+async function updateProduct(req: Request, res: Response) {
   const { id } = req.params;
   const updateData = req.body;
 
@@ -100,3 +100,5 @@ export async function updateProduct(req: Request, res: Response) {
     return res.status(500).send('Error updating product');
   }
 }
+
+export { addProduct, deleteProduct, getAll, getOneByTitle, getProductsByCategory, updateProduct };
