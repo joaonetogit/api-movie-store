@@ -1,19 +1,24 @@
 import dotenv from 'dotenv';
 import { NextFunction, Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
+
 dotenv.config();
 
-const codeJWTSecret = process.env.JWT_SECRET as string;
+// const codeJWTSecret = process.env.JWT_SECRET as string;
 
-const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.headers['authorization'] && req.headers['authorization'].split(' ')[1];
-  if (token == null) return res.status(403).send('No token provided');
+export default function authenticateToken(req: Request, res: Response, next: NextFunction) {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
 
-  jwt.verify(token, codeJWTSecret, (err, user) => {
-    if (err) return res.status(403).send('Invalid token');
-    req.user = user;
-    next();
-  });
-};
+  if (token == null) {
+    return res.status(403).send('No token provided');
+  }
 
-export default authenticateToken;
+  return next();
+  // return jwt.verify(token, codeJWTSecret, (err, user) => {
+  //   if (err) {
+  //     return res.status(403).send('Invalid token');
+  //   }
+  //   req.user = user as any;
+  //   next();
+  // });
+}

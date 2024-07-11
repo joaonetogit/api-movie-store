@@ -1,8 +1,10 @@
+/* eslint-disable no-console */
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import router from './routes/index.js';
+
 const app = express();
 dotenv.config();
 
@@ -15,7 +17,7 @@ app.use(express.json());
 app.use('/api', router);
 
 mongoose
-  .connect(process.env.MONGODB_URI as string)
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Successfully connected to MongoDB Atlas!');
   })

@@ -1,7 +1,8 @@
 import dotenv from 'dotenv';
+
 dotenv.config();
 
-export function getUser(username: string, password: string) {
+export default function getUser(username: string, password: string) {
   const adminUsername = process.env.SECRET_USER as string;
   const passRegistered = process.env.SECRET_PASS as string;
 

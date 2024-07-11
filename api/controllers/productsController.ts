@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import Product from '../models/product.js';
+import ProductModel from '../models/product.js';
 import normalizeTitle from '../utils/normalizeText.js';
 
 export async function getAll(req: Request, res: Response) {
   try {
-    const products = await Product.find();
+    const products = await ProductModel.find();
     return res.status(200).json(products);
   } catch (err) {
     return res.status(500).send('Error fetching products');
@@ -16,15 +16,14 @@ export async function getOneByTitle(req: Request, res: Response) {
   const titleToSearch = normalizeTitle(title);
 
   try {
-    const products = await Product.find();
+    const products = await ProductModel.find();
 
-    const product = products.find(product => normalizeTitle(product.title) === titleToSearch);
+    const foundProduct = products.find(p => normalizeTitle(p.title) === titleToSearch);
 
-    if (product) {
-      return res.json(product);
-    } else {
-      return res.status(404).send('Product not found');
+    if (foundProduct) {
+      return res.json(foundProduct);
     }
+    return res.status(404).send('Product not found');
   } catch (err) {
     return res.status(500).send('Error fetching product');
   }
@@ -35,27 +34,24 @@ export async function getProductsByCategory(req: Request, res: Response) {
   const categoryToSearch = normalizeTitle(category);
 
   try {
-    const products = await Product.find();
+    const products = await ProductModel.find();
 
-    const filteredProducts = products.find(
-      product => normalizeTitle(product.category) === categoryToSearch,
-    );
+    const filteredProducts = products.filter(p => normalizeTitle(p.category) === categoryToSearch);
 
-    if (filteredProducts) {
+    if (filteredProducts.length > 0) {
       return res.json(filteredProducts);
-    } else {
-      return res.status(404).send('No products found for this categoryd');
     }
+    return res.status(404).send('No products found for this category');
   } catch (err) {
     return res.status(500).send('Error fetching products');
   }
 }
 
-export async function newProduct(req: Request, res: Response) {
+export async function addProduct(req: Request, res: Response) {
   try {
-    const product = req.body;
-    const newProduct = await Product.create(product);
-    return res.status(201).json(newProduct);
+    const productData = req.body;
+    const createdProduct = await ProductModel.create(productData);
+    return res.status(201).json(createdProduct);
   } catch (err) {
     return res.status(500).send('Error creating product');
   }
@@ -65,7 +61,7 @@ export async function deleteProduct(req: Request, res: Response) {
   const { id } = req.params;
 
   try {
-    const productToDelete = await Product.findById(id);
+    const productToDelete = await ProductModel.findById(id);
 
     if (!productToDelete) {
       return res.status(404).send('Product not found');
@@ -84,17 +80,18 @@ export async function updateProduct(req: Request, res: Response) {
   const updateData = req.body;
 
   try {
-    const productToUpdate = await Product.findById(id);
+    const productToUpdate = await ProductModel.findById(id);
 
     if (!productToUpdate) {
       return res.status(404).send('Product not found');
     }
 
-    for (let key in updateData) {
-      if (updateData.hasOwnProperty(key)) {
-        productToUpdate[key] = updateData[key];
+    Object.keys(updateData).forEach(key => {
+      if (Object.prototype.hasOwnProperty.call(updateData, key)) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (productToUpdate as any)[key] = updateData[key];
       }
-    }
+    });
 
     await productToUpdate.save();
 
