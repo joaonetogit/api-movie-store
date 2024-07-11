@@ -21,10 +21,11 @@ async function getOneByTitle(req: Request, res: Response) {
 
     const foundProduct = products.find(p => normalizeTitle(p.title) === titleToSearch);
 
-    if (foundProduct) {
-      return res.json(foundProduct);
+    if (!foundProduct) {
+      return res.status(HttpStatusCodes.NOT_FOUND).send('Product not found');
     }
-    return res.status(HttpStatusCodes.NOT_FOUND).send('Product not found');
+
+    return res.json(foundProduct);
   } catch (err) {
     return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send('Error fetching product');
   }
@@ -52,7 +53,7 @@ async function addProduct(req: Request, res: Response) {
   try {
     const productData = req.body;
     const createdProduct = await ProductModel.create(productData);
-    return res.status(HttpStatusCodes.UNAUTHORIZED).json(createdProduct);
+    return res.status(HttpStatusCodes.OK).json(createdProduct);
   } catch (err) {
     return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send('Error creating product');
   }

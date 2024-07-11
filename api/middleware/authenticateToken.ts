@@ -1,25 +1,30 @@
 import dotenv from 'dotenv';
 import { NextFunction, Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import HttpStatusCodes from '../types/HttpStatusCodes';
 
 dotenv.config();
 
-// const codeJWTSecret = process.env.JWT_SECRET as string;
+const codeJWTSecret = process.env.JWT_SECRET;
 
 export default function authenticateToken(req: Request, res: Response, next: NextFunction) {
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(' ')[1];
+  const { authorization } = req.headers;
 
-  if (token == null) {
-    return res.status(HttpStatusCodes.FORBIDDEN).send('No token provided');
+  if (!authorization) {
+    return res.status(HttpStatusCodes.NOT_FOUND).json({ message: 'No token provided' });
+  }
+
+  const token = authorization.replace('Bearer ', '');
+
+  if (!token) {
+    return res.status(HttpStatusCodes.UNAUTHORIZED).json({ message: 'Token unauthorized' });
+  }
+
+  try {
+    jwt.verify(token, codeJWTSecret);
+  } catch (error) {
+    return res.status(HttpStatusCodes.FORBIDDEN).json({ message: 'Invalid token' });
   }
 
   return next();
-  // return jwt.verify(token, codeJWTSecret, (err, user) => {
-  //   if (err) {
-  //     return res.status(403).send('Invalid token');
-  //   }
-  //   req.user = user as any;
-  //   next();
-  // });
 }
