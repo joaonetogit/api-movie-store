@@ -1,13 +1,14 @@
 import { Request, Response } from 'express';
 import ProductModel from '../models/product';
+import HttpStatusCodes from '../types/HttpStatusCodes';
 import normalizeTitle from '../utils/normalizeText';
 
 async function getAll(req: Request, res: Response) {
   try {
     const products = await ProductModel.find();
-    return res.status(200).json(products);
+    return res.status(HttpStatusCodes.OK).json(products);
   } catch (err) {
-    return res.status(500).send('Error fetching products');
+    return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send('Error fetching products');
   }
 }
 
@@ -23,9 +24,9 @@ async function getOneByTitle(req: Request, res: Response) {
     if (foundProduct) {
       return res.json(foundProduct);
     }
-    return res.status(404).send('Product not found');
+    return res.status(HttpStatusCodes.NOT_FOUND).send('Product not found');
   } catch (err) {
-    return res.status(500).send('Error fetching product');
+    return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send('Error fetching product');
   }
 }
 
@@ -41,9 +42,9 @@ async function getProductsByCategory(req: Request, res: Response) {
     if (filteredProducts.length > 0) {
       return res.json(filteredProducts);
     }
-    return res.status(404).send('No products found for this category');
+    return res.status(HttpStatusCodes.NOT_FOUND).send('No products found for this category');
   } catch (err) {
-    return res.status(500).send('Error fetching products');
+    return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send('Error fetching products');
   }
 }
 
@@ -51,9 +52,9 @@ async function addProduct(req: Request, res: Response) {
   try {
     const productData = req.body;
     const createdProduct = await ProductModel.create(productData);
-    return res.status(201).json(createdProduct);
+    return res.status(HttpStatusCodes.UNAUTHORIZED).json(createdProduct);
   } catch (err) {
-    return res.status(500).send('Error creating product');
+    return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send('Error creating product');
   }
 }
 
@@ -64,14 +65,14 @@ async function deleteProduct(req: Request, res: Response) {
     const productToDelete = await ProductModel.findById(id);
 
     if (!productToDelete) {
-      return res.status(404).send('Product not found');
+      return res.status(HttpStatusCodes.NOT_FOUND).send('Product not found');
     }
 
     await productToDelete.deleteOne();
 
-    return res.status(200).send('Product deleted successfully');
+    return res.status(HttpStatusCodes.OK).send('Product deleted successfully');
   } catch (err) {
-    return res.status(500).send('Error deleting product');
+    return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send('Error deleting product');
   }
 }
 
@@ -83,7 +84,7 @@ async function updateProduct(req: Request, res: Response) {
     const productToUpdate = await ProductModel.findById(id);
 
     if (!productToUpdate) {
-      return res.status(404).send('Product not found');
+      return res.status(HttpStatusCodes.NOT_FOUND).send('Product not found');
     }
 
     Object.keys(updateData).forEach(key => {
@@ -95,9 +96,9 @@ async function updateProduct(req: Request, res: Response) {
 
     await productToUpdate.save();
 
-    return res.status(200).json(productToUpdate);
+    return res.status(HttpStatusCodes.OK).json(productToUpdate);
   } catch (err) {
-    return res.status(500).send('Error updating product');
+    return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send('Error updating product');
   }
 }
 

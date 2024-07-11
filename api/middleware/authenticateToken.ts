@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import { NextFunction, Request, Response } from 'express';
+import HttpStatusCodes from '../types/HttpStatusCodes';
 
 dotenv.config();
 
@@ -10,7 +11,7 @@ export default function authenticateToken(req: Request, res: Response, next: Nex
   const token = authHeader && authHeader.split(' ')[1];
 
   if (token == null) {
-    return res.status(403).send('No token provided');
+    return res.status(HttpStatusCodes.FORBIDDEN).send('No token provided');
   }
 
   return next();
