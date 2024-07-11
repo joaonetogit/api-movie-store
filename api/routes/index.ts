@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import authUser from '../controllers/authController.js';
+import authUser from '../controllers/authController';
 import {
   addProduct,
   deleteProduct,
@@ -7,8 +7,8 @@ import {
   getOneByTitle,
   getProductsByCategory,
   updateProduct,
-} from '../controllers/productsController.js';
-import authenticateToken from '../middleware/authenticateToken.js';
+} from '../controllers/productsController';
+import authenticateToken from '../middleware/authenticateToken';
 
 const router = Router();
 

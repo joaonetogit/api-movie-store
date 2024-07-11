@@ -1,10 +1,10 @@
 {
   "name": "api-movie-store",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "api/index.ts",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch api/index.js",
+    "dev": "tsx watch api/index.ts",
     "prettier": "prettier api --write",
     "lint": "eslint api --ext .ts",
     "lint:fix": "eslint api --fix --ext .ts"
