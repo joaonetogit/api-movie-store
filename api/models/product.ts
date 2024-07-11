@@ -18,16 +18,8 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
-  priceWithDiscount: {
-    type: Number,
-    required: false,
-  },
   image: {
     type: String,
-    required: true,
-  },
-  quantityAvailable: {
-    type: Number,
     required: true,
   },
   description: {

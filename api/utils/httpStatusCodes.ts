@@ -1,4 +1,4 @@
-const HttpStatusCodes = {
+const httpStatusCodes = {
   OK: 200,
   CREATED: 201,
   UNAUTHORIZED: 401,
@@ -7,4 +7,4 @@ const HttpStatusCodes = {
   FORBIDDEN: 403,
 } as const;
 
-export default HttpStatusCodes;
+export default httpStatusCodes;
