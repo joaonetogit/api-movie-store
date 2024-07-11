@@ -4,6 +4,8 @@
   "main": "api/index.ts",
   "type": "module",
   "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
     "dev": "tsx watch api/index.ts",
     "prettier": "prettier api --write",
     "lint": "eslint api --ext .ts",
