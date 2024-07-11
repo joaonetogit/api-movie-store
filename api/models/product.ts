@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
+import mongoose from 'mongoose';
+import { v4 as uuidv4 } from 'uuid';
 
-import { v4 as uuidv4 } from "uuid";
+const { Schema } = mongoose;
 
 const productSchema = new Schema({
   _id: { type: String, default: uuidv4(), required: true, immutable: true },
@@ -18,16 +18,8 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
-  priceWithDiscount: {
-    type: Number,
-    required: false,
-  },
   image: {
     type: String,
-    required: true,
-  },
-  quantityAvailable: {
-    type: Number,
     required: true,
   },
   description: {
@@ -48,4 +40,4 @@ const productSchema = new Schema({
   },
 });
 
-export default mongoose.model("Product", productSchema);
+export default mongoose.model('ProductModel', productSchema);
